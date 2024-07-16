@@ -6,3 +6,4 @@ Win32/**
 *.dcu
 *.dpr
 *.dsk
+*.vlb

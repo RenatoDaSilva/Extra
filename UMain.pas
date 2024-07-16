@@ -3,12 +3,24 @@ unit UMain;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.Buttons,
+  Vcl.Imaging.PngImage;
 
 type
   TForm1 = class(TForm)
-    procedure FormCreate(Sender: TObject);
+    BarraDeBotoes: TControlBar;
+    btEmpresas: TSpeedButton;
+    SpeedButton1: TSpeedButton;
   private
     { Private declarations }
   public
@@ -21,10 +33,5 @@ var
 implementation
 
 {$R *.dfm}
-
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-GetCurrentDir
-end;
 
 end.
