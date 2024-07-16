@@ -1,0 +1,8 @@
+__history/**
+__recovery/**
+Win32/**
+*.local
+*.identcache
+*.dcu
+*.dpr
+*.dsk

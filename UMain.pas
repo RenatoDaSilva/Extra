@@ -1,4 +1,4 @@
-unit main;
+unit UMain;
 
 interface
 
@@ -8,6 +8,7 @@ uses
 
 type
   TForm1 = class(TForm)
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -20,5 +21,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+GetCurrentDir
+end;
 
 end.
