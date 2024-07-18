@@ -14,24 +14,46 @@ uses
   Vcl.Dialogs,
   Vcl.ExtCtrls,
   Vcl.Buttons,
-  Vcl.Imaging.PngImage;
+  UDMMain;
 
 type
-  TForm1 = class(TForm)
+  TFMain = class(TForm)
     BarraDeBotoes: TControlBar;
-    btEmpresas: TSpeedButton;
-    SpeedButton1: TSpeedButton;
+    sbEmpregados: TSpeedButton;
+    sbEmpresas: TSpeedButton;
+    procedure FormDestroy(Sender: TObject);
+    procedure sbEmpresasClick(Sender: TObject);
+    procedure sbEmpregadosClick(Sender: TObject);
   private
-    { Private declarations }
+    DMMain: TDMMain;
   public
     { Public declarations }
   end;
 
 var
-  Form1: TForm1;
+  FMain: TFMain;
 
 implementation
 
 {$R *.dfm}
+
+uses UFrmEmpresa, UFrmEmpregado;
+
+procedure TFMain.FormDestroy(Sender: TObject);
+begin
+  DMMain.Free;
+end;
+
+procedure TFMain.sbEmpregadosClick(Sender: TObject);
+begin
+  with TFrmEmpregado.Create(nil) do
+    Show;
+end;
+
+procedure TFMain.sbEmpresasClick(Sender: TObject);
+begin
+  with TFrmEmpresa.Create(nil) do
+    Show;
+end;
 
 end.

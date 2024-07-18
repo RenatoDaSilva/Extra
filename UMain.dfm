@@ -1,4 +1,4 @@
-object Form1: TForm1
+object FMain: TFMain
   Left = 0
   Top = 0
   Caption = 'Teste para Extra Digital'
@@ -13,6 +13,7 @@ object Form1: TForm1
   FormStyle = fsMDIForm
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object BarraDeBotoes: TControlBar
@@ -23,7 +24,7 @@ object Form1: TForm1
     Align = alTop
     AutoSize = True
     TabOrder = 0
-    object btEmpresas: TSpeedButton
+    object sbEmpregados: TSpeedButton
       Left = 102
       Top = 2
       Width = 75
@@ -546,8 +547,9 @@ object Form1: TForm1
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
+      OnClick = sbEmpregadosClick
     end
-    object SpeedButton1: TSpeedButton
+    object sbEmpresas: TSpeedButton
       Left = 11
       Top = 2
       Width = 78
@@ -1070,6 +1072,7 @@ object Form1: TForm1
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
+      OnClick = sbEmpresasClick
     end
   end
 end
