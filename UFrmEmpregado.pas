@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UFrmConsulta, Data.DB, Vcl.ExtCtrls,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ToolWin, Vcl.ComCtrls,
-  Vcl.Buttons, Vcl.Mask;
+  Vcl.Buttons, Vcl.Mask, UConsulta;
 
 type
   TFrmEmpregado = class(TFrmConsulta)
@@ -74,10 +74,16 @@ type
     DBLCBPesquisaEstado: TDBLookupComboBox;
     DSPesquisaCidade: TDataSource;
     DSPesquisaEstado: TDataSource;
-    procedure DSConsultaStateChange(Sender: TObject);
     procedure DBEIdCidadeChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    FConsultaEmpresas: TConsulta;
+    FConsultaCidades: TConsulta;
+    FConsultaEstados: TConsulta;
+
+    procedure CriarConsultasAuxiliares;
   public
     { Public declarations }
   end;
@@ -99,17 +105,42 @@ begin
     DSConsulta.DataSet.FieldByName('IDUF').AsInteger := DSPesquisaCidade.DataSet.FieldByName('IDUF').AsInteger;
  end;
 
-procedure TFrmEmpregado.DSConsultaStateChange(Sender: TObject);
-var
-  Editando: boolean;
+procedure TFrmEmpregado.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
 
-  Editando := (DSConsulta.State in dsEditModes);
+  FConsultaEmpresas.Free;
+  FConsultaCidades.Free;
+  FConsultaEstados.Free;
+end;
 
-  DSPesquisaEmpresa.DataSet.Active := Editando;
-  DSPesquisaCidade.DataSet.Active := Editando;
-  DSPesquisaEstado.DataSet.Active := Editando;
+procedure TFrmEmpregado.FormShow(Sender: TObject);
+begin
+  inherited;
+
+  CriarConsultasAuxiliares;
+end;
+
+procedure TFrmEmpregado.CriarConsultasAuxiliares;
+begin
+  FConsultaEmpresas := TConsulta.Create(DMMain.FDCPrincipal);
+  FConsultaEmpresas.SQL := 'SELECT IDEMPRESA, NMEMPRESA FROM CADEMPRESA ' +
+    'WHERE STATIVO = ''S'' AND STEXCLUIDO <> ''S'';';
+  FConsultaEmpresas.NomesDeExibicao := 'Código, Nome';
+  FConsultaEmpresas.Conectar;
+  DSPesquisaEmpresa.DataSet := FConsultaEmpresas.DataSet;
+
+  FConsultaCidades := TConsulta.Create(DMMain.FDCPrincipal);
+  FConsultaCidades.SQL := 'SELECT IDCIDADE, NMCIDADE, IDUF FROM CADCIDADE;';
+  FConsultaCidades.NomesDeExibicao := 'Código, Nome, Estado';
+  FConsultaCidades.Conectar;
+  DSPesquisaCidade.DataSet := FConsultaCidades.DataSet;
+
+  FConsultaEstados := TConsulta.Create(DMMain.FDCPrincipal);
+  FConsultaEstados.SQL := 'SELECT IDUF, NMESTADO FROM CADUF;';
+  FConsultaEstados.NomesDeExibicao := 'Código, Nome';
+  FConsultaEstados.Conectar;
+  DSPesquisaEstado.DataSet := FConsultaEstados.DataSet;
 end;
 
 end.

@@ -14,7 +14,7 @@ inherited FrmEmpregado: TFrmEmpregado
     Width = 925
     Height = 437
     ExplicitWidth = 925
-    ExplicitHeight = 526
+    ExplicitHeight = 437
     inherited DBTXExcluido: TDBText
       Top = 410
       ExplicitTop = 410
@@ -572,7 +572,7 @@ inherited FrmEmpregado: TFrmEmpregado
         Break = False
         Control = CBExibirExcluidos
         ImageIndex = -1
-        Width = 506
+        Width = 501
       end>
     ExplicitWidth = 925
     inherited DBNConsulta: TDBNavigator
@@ -589,19 +589,16 @@ inherited FrmEmpregado: TFrmEmpregado
   end
   object DSPesquisaEmpresa: TDataSource
     AutoEdit = False
-    DataSet = DMMain.FDQEmpresas
     Left = 535
     Top = 90
   end
   object DSPesquisaCidade: TDataSource
     AutoEdit = False
-    DataSet = DMMain.FDQCidades
     Left = 539
     Top = 297
   end
   object DSPesquisaEstado: TDataSource
     AutoEdit = False
-    DataSet = DMMain.FDEstados
     Left = 543
     Top = 354
   end
